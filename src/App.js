@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from 'react';
+import { Switch, Route } from 'react-router';
+import { ThemeProvider } from '@mui/material';
+import theme from './style/theme';
 
-function App() {
+import Spinner from './components/Spinner';
+import Header from './components/Header';
+
+const HomePage = lazy(() => import('./pages/Home'));
+const UploadPage = lazy(() => import('./pages/Upload'));
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Switch>
+        <ThemeProvider theme={theme}>
+          <Suspense fallback={<Spinner />}>
+            <Route exact path='/' component={HomePage} />
+            <Route path='/upload' component={UploadPage} />
+          </Suspense>
+        </ThemeProvider>
+      </Switch>
     </div>
   );
-}
+};
 
 export default App;
