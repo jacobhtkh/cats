@@ -39,7 +39,6 @@ const Upload = (props) => {
       },
     },
     browseButton: {
-      borderWidth: 2,
       width: '100%',
     },
   });
@@ -77,15 +76,16 @@ const Upload = (props) => {
                 {selectedImage ? selectedImage.name : 'Select an image'}
               </Typography>
             </Box>
-            <label htmlFor='contained-button-file'>
-              <InputBase
-                type='file'
-                id='contained-button-file'
-                inputProps={{ accept: 'image/*' }}
-                onChange={imageSelectedHandler}
-                style={{ display: 'none' }}
-              />
-              {!previewImage ? (
+
+            {!previewImage ? (
+              <label htmlFor='contained-button-image-file'>
+                <InputBase
+                  type='file'
+                  id='contained-button-image-file'
+                  inputProps={{ accept: 'image/*' }}
+                  onChange={imageSelectedHandler}
+                  style={{ display: 'none' }}
+                />
                 <Box paddingTop={1} display='flex' justifyContent='center'>
                   <Button
                     variant='contained'
@@ -97,39 +97,39 @@ const Upload = (props) => {
                     Browse
                   </Button>
                 </Box>
-              ) : (
-                <Box pt={1.25} display='flex' flexDirection='column'>
-                  <LoadingButton
-                    startIcon={<UploadIcon />}
-                    variant='contained'
-                    disableRipple
-                    style={{ textTransform: 'none' }}
-                  >
-                    Upload
-                  </LoadingButton>
-                  <label htmlFor='contained-button-file'>
-                    <InputBase
-                      type='file'
-                      id='contained-button-file'
-                      inputProps={{ accept: 'image/*' }}
-                      onChange={imageSelectedHandler}
-                      style={{ display: 'none' }}
-                    />
-                    <Box paddingTop={1.5}>
-                      <Button
-                        variant='outlined'
-                        component='span'
-                        disableRipple
-                        className={classes.browseButton}
-                        style={{ textTransform: 'none' }}
-                      >
-                        Browse
-                      </Button>
-                    </Box>
-                  </label>
-                </Box>
-              )}
-            </label>
+              </label>
+            ) : (
+              <Box pt={1.25} display='flex' flexDirection='column'>
+                <LoadingButton
+                  startIcon={<UploadIcon />}
+                  variant='contained'
+                  disableRipple
+                  style={{ textTransform: 'none' }}
+                >
+                  Upload
+                </LoadingButton>
+                <label htmlFor='outlined-button-image-file'>
+                  <InputBase
+                    type='file'
+                    id='outlined-button-image-file'
+                    inputProps={{ accept: 'image/*' }}
+                    onChange={imageSelectedHandler}
+                    style={{ display: 'none' }}
+                  />
+                  <Box paddingTop={1.5}>
+                    <Button
+                      variant='outlined'
+                      component='span'
+                      disableRipple
+                      className={classes.browseButton}
+                      style={{ textTransform: 'none' }}
+                    >
+                      Browse
+                    </Button>
+                  </Box>
+                </label>
+              </Box>
+            )}
           </Box>
         </Grid>
       </Grid>
