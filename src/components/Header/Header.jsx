@@ -8,7 +8,7 @@ const Header = () => {
 
   const useStyles = makeStyles({
     link: {
-      color: 'inherit',
+      color: 'white',
       textDecoration: 'none',
     },
     catsLogo: {
@@ -20,7 +20,7 @@ const Header = () => {
     },
     upload: {
       fontWeight: 500,
-      fontSize: '1.35rem !important',
+      fontSize: '1.2rem !important',
       [theme.breakpoints.down('sm')]: {
         fontSize: '1rem !important',
       },
@@ -32,15 +32,17 @@ const Header = () => {
   return (
     <header>
       <Box
-        paddingY={2}
+        paddingY={1.5}
         paddingX={{ xs: 3, md: 4 }}
         display='flex'
         alignItems='center'
+        borderBottom='1px solid rgba(0, 0, 0, 0.2)'
+        backgroundColor='#282828'
       >
         <Link className={classes.link} to='/'>
           <Typography className={classes.catsLogo}>Cats</Typography>
         </Link>
-        <Box ml={10}>
+        <Box ml={{ xs: 5, md: 10 }}>
           <Link className={classes.link} to='/upload'>
             <Typography className={classes.upload}>Upload</Typography>
           </Link>
