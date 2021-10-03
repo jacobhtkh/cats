@@ -33,7 +33,8 @@ const Upload = (props) => {
   const imageUploadHandler = async () => {
     setLoading(true);
     try {
-      const imageUploadRes = await uploadCat(selectedImage);
+      await uploadCat(selectedImage);
+      // const imageUploadRes = await uploadCat(selectedImage);
       setIsUploaded(true);
       // console.log(imageUploadRes);
     } catch (err) {
