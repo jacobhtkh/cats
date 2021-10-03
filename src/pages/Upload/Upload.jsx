@@ -6,18 +6,40 @@ import {
   Typography,
   useTheme,
   Button,
+  Alert,
+  AlertTitle,
+  CircularProgress,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { LoadingButton } from '@mui/lab';
 import UploadIcon from '@mui/icons-material/Upload';
+import uploadCat from '../../api/uploadCat';
+import { Redirect } from 'react-router';
 
 const Upload = (props) => {
   const [selectedImage, setSelectedImage] = useState();
   const [previewImage, setPreviewImage] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, seterror] = useState('');
+  const [isUploaded, setIsUploaded] = useState(false);
 
   const imageSelectedHandler = (event) => {
+    seterror('');
+    setIsUploaded(false);
     setSelectedImage(event.target.files[0]);
     setPreviewImage(URL.createObjectURL(event.target.files[0]));
+  };
+
+  const imageUploadHandler = async () => {
+    setLoading(true);
+    try {
+      const imageUploadRes = await uploadCat(selectedImage);
+      setIsUploaded(true);
+      // console.log(imageUploadRes);
+    } catch (err) {
+      seterror(err.response.data.message);
+    }
+    setLoading(false);
   };
 
   const theme = useTheme();
@@ -31,11 +53,10 @@ const Upload = (props) => {
       },
     },
     previewImage: {
+      objectFit: 'contain',
       width: 360,
-      height: 360,
       [theme.breakpoints.down('sm')]: {
         width: 240,
-        height: 240,
       },
     },
     browseButton: {
@@ -44,6 +65,8 @@ const Upload = (props) => {
   });
 
   const classes = useStyles();
+
+  if (isUploaded) return <Redirect to='/' />;
 
   return (
     <Box paddingX={{ xs: 3, md: 4 }} mt={2.5}>
@@ -99,36 +122,74 @@ const Upload = (props) => {
                 </Box>
               </label>
             ) : (
-              <Box pt={1.25} display='flex' flexDirection='column'>
-                <LoadingButton
-                  startIcon={<UploadIcon />}
-                  variant='contained'
-                  disableRipple
-                  style={{ textTransform: 'none' }}
-                >
-                  Upload
-                </LoadingButton>
-                <label htmlFor='outlined-button-image-file'>
-                  <InputBase
-                    type='file'
-                    id='outlined-button-image-file'
-                    inputProps={{ accept: 'image/*' }}
-                    onChange={imageSelectedHandler}
-                    style={{ display: 'none' }}
-                  />
-                  <Box paddingTop={1.5}>
-                    <Button
-                      variant='outlined'
-                      component='span'
-                      disableRipple
-                      className={classes.browseButton}
-                      style={{ textTransform: 'none' }}
-                    >
-                      Browse
-                    </Button>
-                  </Box>
-                </label>
-              </Box>
+              <>
+                <Box mt={1.25} display='flex' flexDirection='column'>
+                  <LoadingButton
+                    startIcon={<UploadIcon />}
+                    loadingIndicator={
+                      <>
+                        <Box
+                          display='flex'
+                          alignItems='center'
+                          whiteSpace='nowrap'
+                        >
+                          <CircularProgress
+                            color='inherit'
+                            size={16}
+                            style={{ marginRight: 8 }}
+                          />
+                          Uploading {selectedImage && selectedImage.name}
+                        </Box>
+                      </>
+                    }
+                    variant='contained'
+                    onClick={imageUploadHandler}
+                    loading={loading}
+                    disableRipple
+                    style={{ textTransform: 'none' }}
+                  >
+                    Upload
+                  </LoadingButton>
+                  <label htmlFor='outlined-button-image-file'>
+                    <InputBase
+                      type='file'
+                      id='outlined-button-image-file'
+                      inputProps={{ accept: 'image/*' }}
+                      onChange={imageSelectedHandler}
+                      style={{ display: 'none' }}
+                    />
+                    <Box paddingTop={1.5}>
+                      <Button
+                        variant='outlined'
+                        component='span'
+                        disableRipple
+                        className={classes.browseButton}
+                        style={{ textTransform: 'none' }}
+                      >
+                        Browse
+                      </Button>
+                    </Box>
+                  </label>
+                  {error && (
+                    <Box py={1.5} width={{ xs: 240, sm: '100%' }}>
+                      <Alert severity='error'>
+                        <AlertTitle>Error</AlertTitle>
+                        <Box>{error}</Box>
+                        <Box pt={0.5}>
+                          Select an image showing a cat and try again
+                        </Box>
+                      </Alert>
+                    </Box>
+                  )}
+                  {isUploaded && (
+                    <Box py={1.5} width={{ xs: 240, sm: '100%' }}>
+                      <Alert severity='success'>
+                        Uploaded {selectedImage && selectedImage.name}
+                      </Alert>
+                    </Box>
+                  )}
+                </Box>
+              </>
             )}
           </Box>
         </Grid>
