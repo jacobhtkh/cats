@@ -16,9 +16,14 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { makeStyles } from '@mui/styles';
 import getCats from '../../api/getCats';
-// import { placeholderImgUrl } from '../../constants/constants';
+import favouriteCat from '../../api/favouriteCat';
+import getFavourites from '../../api/getFavourites';
+import unfavouriteCat from '../../api/unfavouriteCat';
+
 const HomePage = () => {
   const [catData, setCatData] = useState();
+  const [catFavourited, setCatFavourited] = useState(false);
+  const [favouritesData, setFavouritesData] = useState();
 
   const getCatData = async () => {
     try {
@@ -30,9 +35,44 @@ const HomePage = () => {
     }
   };
 
+  const getFavouritesData = async () => {
+    try {
+      const favouritesDataRes = await getFavourites();
+      console.log(favouritesDataRes);
+      setFavouritesData(favouritesDataRes.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getCatData();
+
+    getFavouritesData();
   }, []);
+
+  const favouriteClicked = async (imageId) => {
+    console.log(imageId);
+    try {
+      const favouritedCatResponse = await favouriteCat(imageId);
+      await getFavouritesData();
+      // setCatFavourited(true);
+      console.log(favouritedCatResponse);
+    } catch (err) {
+      // setCatFavourited(true);
+      console.log(err.response.data.message);
+    }
+  };
+
+  const unfavouriteClicked = async (favouriteId) => {
+    try {
+      const unfavouritedCatResponse = await unfavouriteCat(favouriteId);
+      await getFavouritesData();
+      console.log(unfavouritedCatResponse);
+    } catch (err) {
+      console.log(err.response.data.message);
+    }
+  };
 
   const theme = useTheme();
 
@@ -62,22 +102,44 @@ const HomePage = () => {
               cols={mdDown && !smDown ? 2 : mdDown && smDown ? 1 : 4}
             >
               {catData.map(({ url, id }) => {
+                const favCatData =
+                  favouritesData &&
+                  favouritesData.find((favCat) => favCat.image_id === id);
+
+                const isFavCat = favCatData ? true : false;
+
+                const favouriteId = isFavCat && favCatData.id;
+
+                console.log('isFavCat', isFavCat);
+                console.log('favCatData', favCatData);
+                console.log('favouriteCatId', favouriteId);
+
                 return (
                   <ImageListItem key={url}>
-                    <img src={url} alt='Cat' loading='lazy' />
+                    <img
+                      src={url}
+                      alt='Cat'
+                      loading='lazy'
+                      style={{ objectFit: 'contain' }}
+                    />
                     <ImageListItemBar
                       sx={{
                         background: 'none',
                       }}
-                      position='top'
+                      position='below'
                       actionPosition='right'
                       actionIcon={
                         <IconButton
-                          sx={{ color: 'black' }}
+                          sx={{ color: isFavCat ? 'red' : 'black' }}
                           aria-label='favourite cat'
                           disableRipple
+                          onClick={() => {
+                            isFavCat
+                              ? unfavouriteClicked(favouriteId)
+                              : favouriteClicked(id);
+                          }}
                         >
-                          <FavoriteBorderIcon />
+                          {isFavCat ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                         </IconButton>
                       }
                     />
