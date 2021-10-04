@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import getCats from '../../api/getCats';
+import { placeholderImgUrl } from '../../constants/constants';
 
 const HomePage = () => {
   const [catData, setCatData] = useState();
@@ -55,40 +56,88 @@ const HomePage = () => {
             cols={mdDown && !smDown ? 3 : mdDown && smDown ? 2 : 4}
           >
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
             <ImageListItem>
-              <img src={catData?.data[0].url} alt='Cat' loading='lazy' />
+              <img
+                src={catData ? catData.data[0].url : placeholderImgUrl}
+                alt='Cat'
+                loading='lazy'
+              />
             </ImageListItem>
           </ImageList>
         </Grid>

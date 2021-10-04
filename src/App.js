@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router';
 import { ThemeProvider } from '@mui/material';
 import theme from './style/theme';
 
-import Spinner from './components/Spinner';
+// import Spinner from './components/Spinner';
 import Header from './components/Header';
 
 const HomePage = lazy(() => import('./pages/Home'));
@@ -15,7 +15,7 @@ const App = () => {
       <Header />
       <Switch>
         <ThemeProvider theme={theme}>
-          <Suspense fallback={<Spinner />}>
+          <Suspense fallback={<></>}>
             <Route exact path='/' component={HomePage} />
             <Route path='/upload' component={UploadPage} />
           </Suspense>
