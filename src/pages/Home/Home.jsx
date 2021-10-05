@@ -204,11 +204,13 @@ const HomePage = () => {
                             paddingLeft: 8,
                             fontWeight: 600,
                             fontSize: '0.9375rem',
-                            display: 'flex',
                           }}
                         >
                           Score:&nbsp;
-                          <Typography style={{ fontSize: '0.9375rem' }}>
+                          <Typography
+                            component='span'
+                            style={{ fontSize: '0.9375rem' }}
+                          >
                             {score}
                           </Typography>
                         </Typography>
