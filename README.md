@@ -1,3 +1,9 @@
+# Cats Front End Challenge
+
+This is a react app for a front end challenge intergating the cats api
+
+[HEROKU LIVE DEMO](https://cats-htkh.herokuapp.com/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
