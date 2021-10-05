@@ -3,7 +3,7 @@ import AxiosInstance from './request';
 const unfavouriteCat = async (favouriteId) => {
   try {
     const headers = {
-      'x-api-key': process.env.REACT_APP_CAT_API_KEY,
+      'x-api-key': process.env.REACT_APP_CAT_API_KEY || process.env.CAT_API_KEY,
     };
 
     const options = {

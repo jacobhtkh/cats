@@ -4,7 +4,7 @@ const uploadCat = async (catImageFile) => {
   try {
     const formData = new FormData();
     const headers = {
-      'x-api-key': process.env.REACT_APP_CAT_API_KEY,
+      'x-api-key': process.env.REACT_APP_CAT_API_KEY || process.env.CAT_API_KEY,
     };
 
     const options = {
