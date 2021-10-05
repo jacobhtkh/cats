@@ -211,7 +211,7 @@ const HomePage = () => {
                             component='span'
                             style={{ fontSize: '0.9375rem' }}
                           >
-                            {score}
+                            {score && score}
                           </Typography>
                         </Typography>
                       }
