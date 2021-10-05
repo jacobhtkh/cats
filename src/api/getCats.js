@@ -3,7 +3,7 @@ import AxiosInstance from './request';
 const getCats = async () => {
   try {
     const headers = {
-      'x-api-key': process.env.REACT_APP_CAT_API_KEY || process.env.CAT_API_KEY,
+      'x-api-key': process.env.REACT_APP_CAT_API_KEY,
     };
     const params = {
       limit: 100,
