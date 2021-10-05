@@ -13,7 +13,7 @@ import {
 import { makeStyles } from '@mui/styles';
 import { LoadingButton } from '@mui/lab';
 import UploadIcon from '@mui/icons-material/Upload';
-import uploadCat from '../../api/uploadCat';
+import { uploadCat } from '../../api';
 import { Redirect } from 'react-router';
 
 const Upload = (props) => {
@@ -34,9 +34,7 @@ const Upload = (props) => {
     setLoading(true);
     try {
       await uploadCat(selectedImage);
-      // const imageUploadRes = await uploadCat(selectedImage);
       setIsUploaded(true);
-      // console.log(imageUploadRes);
     } catch (err) {
       seterror(err.response.data.message);
     }

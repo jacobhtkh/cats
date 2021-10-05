@@ -8,12 +8,32 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "catLogo16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "catLogo24.png",
+      "type": "image/png",
+      "sizes": "24x24"
+    },
+    {
+      "src": "catLogo32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "catLogo64.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "catLogo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "catLogo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

@@ -1,6 +1,6 @@
 import AxiosInstance from './request';
 
-const favouriteCat = async (imageId) => {
+const upvoteCat = async (imageId) => {
   try {
     const headers = {
       'x-api-key': process.env.REACT_APP_CAT_API_KEY,
@@ -13,16 +13,17 @@ const favouriteCat = async (imageId) => {
 
     const data = {
       image_id: imageId,
+      value: 1,
     };
 
-    const res = await AxiosInstance.post('/favourites', data, options);
-    console.log('favourited cat');
+    const res = await AxiosInstance.post('/votes', data, options);
+    console.log('upvoted cat');
     return res;
   } catch (err) {
-    console.log('failed at favouriting cat');
+    console.log('failed at upvoting cat');
 
     throw err;
   }
 };
 
-export default favouriteCat;
+export default upvoteCat;

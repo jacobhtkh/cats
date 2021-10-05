@@ -7,10 +7,12 @@ const uploadCat = async (catImageFile) => {
       'x-api-key': process.env.REACT_APP_CAT_API_KEY,
     };
 
-    formData.append('file', catImageFile);
-    const res = await AxiosInstance.post('/images/upload', formData, {
+    const options = {
       headers,
-    });
+    };
+
+    formData.append('file', catImageFile);
+    const res = await AxiosInstance.post('/images/upload', formData, options);
     console.log('upload succeeded');
     return res;
   } catch (err) {
